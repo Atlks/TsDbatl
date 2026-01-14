@@ -40,7 +40,7 @@ export async function getSqlQryWithMltShare(opts) {
     ${orderbyExprs}
   `;
     console.log('Generated SQL:\n', finalSql);
-    // 4. 执行 SQL
+    // 4. 返回 SQL
     return finalSql;
 }
 /**

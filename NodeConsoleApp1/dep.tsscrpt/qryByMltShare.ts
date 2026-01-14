@@ -66,7 +66,7 @@ export async function getSqlQryWithMltShare(opts: QueryOptions): Promise<string>
 
     console.log('Generated SQL:\n', finalSql);
 
-    // 4. 执行 SQL
+    // 4. 返回 SQL
 
     return finalSql;
 }
