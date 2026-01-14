@@ -6,24 +6,7 @@
  *
  */
 import sql from 'mssql';
-/**
- * 判断是否本地节点
- * 外部节点格式示例：
- *   Node2026.hxpay.dbo.pay_in_order_202601
- * 规则：
- *   - 本地表：没有 4 个句号
- *   - 外部表：有 4 个句号
- */
-function localNode(tbl) {
-    if (!tbl)
-        return true; // 空字符串当成本地
-    const dotCount = tbl.split('.').length - 1;
-    // 外部节点有 4 个句号 → 5 段
-    // if dot <> 3 ...is localnode
-    //of dot ==3 not localnode
-    return dotCount !== 3;
-}
-export async function qryWithMltShare(opts) {
+export async function getSqlQryWithMltShare(opts) {
     const { fromTables, whereExpression = '', orderbyExprs = '', size } = opts;
     // 1. 拆分表名
     const tables = fromTables
@@ -59,6 +42,23 @@ export async function qryWithMltShare(opts) {
     console.log('Generated SQL:\n', finalSql);
     // 4. 执行 SQL
     return finalSql;
+}
+/**
+ * 判断是否本地节点
+ * 外部节点格式示例：
+ *   Node2026.hxpay.dbo.pay_in_order_202601
+ * 规则：
+ *   - 本地表：没有 4 个句号
+ *   - 外部表：有 4 个句号
+ */
+function localNode(tbl) {
+    if (!tbl)
+        return true; // 空字符串当成本地
+    const dotCount = tbl.split('.').length - 1;
+    // 外部节点有 4 个句号 → 5 段
+    // if dot <> 3 ...is localnode
+    //of dot ==3 not localnode
+    return dotCount !== 3;
 }
 function getMachnName(tbl) {
     return tbl.split('.')[0];

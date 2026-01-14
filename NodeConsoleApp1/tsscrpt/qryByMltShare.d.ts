@@ -11,6 +11,6 @@ interface QueryOptions {
     orderbyExprs?: string;
     size: number;
 }
-export declare function qryWithMltShare(opts: QueryOptions): Promise<string>;
+export declare function getSqlQryWithMltShare(opts: QueryOptions): Promise<string>;
 export {};
 //# sourceMappingURL=qryByMltShare.d.ts.map

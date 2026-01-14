@@ -16,26 +16,9 @@ interface QueryOptions {
 }
 
 
-/**
- * 判断是否本地节点
- * 外部节点格式示例：
- *   Node2026.hxpay.dbo.pay_in_order_202601
- * 规则：
- *   - 本地表：没有 4 个句号
- *   - 外部表：有 4 个句号
- */
-function localNode(tbl: string): boolean {
-    if (!tbl) return true; // 空字符串当成本地
 
-    const dotCount = tbl.split('.').length - 1;
 
-    // 外部节点有 4 个句号 → 5 段
-    // if dot <> 3 ...is localnode
-    //of dot ==3 not localnode
-    return dotCount !== 3;
-}
-
-export async function qryWithMltShare( opts: QueryOptions) {
+export async function getSqlQryWithMltShare(opts: QueryOptions): Promise<string> {
     const {
         fromTables,
         whereExpression = '',
@@ -88,6 +71,26 @@ export async function qryWithMltShare( opts: QueryOptions) {
     return finalSql;
 }
 
+
+
+/**
+ * 判断是否本地节点
+ * 外部节点格式示例：
+ *   Node2026.hxpay.dbo.pay_in_order_202601
+ * 规则：
+ *   - 本地表：没有 4 个句号
+ *   - 外部表：有 4 个句号
+ */
+function localNode(tbl: string): boolean {
+    if (!tbl) return true; // 空字符串当成本地
+
+    const dotCount = tbl.split('.').length - 1;
+
+    // 外部节点有 4 个句号 → 5 段
+    // if dot <> 3 ...is localnode
+    //of dot ==3 not localnode
+    return dotCount !== 3;
+}
 function getMachnName(tbl: string) {
     return tbl.split('.')[0]
 }

@@ -1,4 +1,4 @@
-import {qryWithMltShare} from "./qryByMltShare.js";
+import {getSqlQryWithMltShare} from "./qryByMltShare.js";
 
 
 // const pool = await sql.connect({
@@ -13,7 +13,7 @@ console.log('测试多表查询...');
 
 
 (async () => {
-    const rows = await qryWithMltShare( {
+    const rows = await getSqlQryWithMltShare( {
         fromTables: 'Node2026.hxpay.dbo.pay_in_order_202601,pay_in_order_202511',
         whereExpression: 'WHERE status = 1',
         orderbyExprs: 'ORDER BY id DESC',
